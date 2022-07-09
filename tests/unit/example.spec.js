@@ -24,7 +24,7 @@ describe('Chart.vue', () => {
       ]
     }
   })
-  it('2) Chart: Test svg type and height by value', async () => {
+  it('2) Chart: Test svg type and css class between different bar values', async () => {
     await new Promise((resolve) => {
       setTimeout(() => {
         const chartBars = wrapper.findAll('.chart-bar-background')
@@ -46,6 +46,29 @@ describe('Chart.vue', () => {
         }
         resolve()
       }, 2000)
+    })
+  })
+  it('3) Chart: Test css class change after clicking different bars', async () => {
+    const chartKeys = wrapper.findAll('.chart-key-element')
+    const chartKeyNormal = chartKeys.at(1)
+    const chartKeyWell = chartKeys.at(3)
+    chartKeyNormal.trigger('click')
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        const chartBars = wrapper.findAll('.chart-bar-background')
+        const chartBarNormal = chartBars.at(1)
+        expect(chartBarNormal.attributes('class').includes('chart-content-element-initial-normal-selected')).toBeTruthy()
+        resolve()
+      }, 1000)
+    })
+    chartKeyWell.trigger('click')
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        const chartBars = wrapper.findAll('.chart-bar-background')
+        const chartBarWell = chartBars.at(3)
+        expect(chartBarWell.attributes('class').includes('chart-content-element-initial-well-selected')).toBeTruthy()
+        resolve()
+      }, 1000)
     })
   })
 })

@@ -88,7 +88,6 @@ export default {
     getChartContentValueClass (index) {
       if (this.localListData[index].show) {
         if (this.localListData[index].selected) {
-          console.log('se', index)
           return ['chart-content-element-show-value', 'chart-content-element-show-value-selected']
         } else {
           return 'chart-content-element-show-value'
