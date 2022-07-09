@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import ChartView from '@/components/charts/chart.vue'
+import ChartView from '@/components/chart.vue'
 export default {
   name: 'MainContent',
   components: {

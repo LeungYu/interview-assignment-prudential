@@ -2,7 +2,7 @@
   <div class="chart">
       <div class="chart-content" ref="chart-bar-container">
           <div v-for="(item, index) of localListData" :key="item.value" :class="item.show === true ? 'chart-content-element' : 'chart-content-element-hidden'">
-              <div :style="{height: item.show === true ? (item.value ? `${containerHeight * item.value / 100}px` : '87px') : '44px'}" :class="getChartContentClass(index, item)">
+              <div :style="{height: item.show === true ? (item.value ? `${containerHeight * item.value / 100}px` : '87px') : '44px'}" :class="['chart-bar-background', getChartContentClass(index, item)]">
                 <div :class="getChartContentValueClass(index)">{{item.value}}</div>
                 <div class="chart-content-element-icontainer">
                     <div class="chart-content-element-icontainer-incontainer">
@@ -23,8 +23,7 @@
 </template>
 
 <script>
-import SvgIcon from '../svgIcon.vue'
-import cloneDeep from 'lodash/cloneDeep'
+import SvgIcon from './svgIcon.vue'
 export default {
   name: 'ChartView',
   components: { SvgIcon },
@@ -39,7 +38,7 @@ export default {
   },
   mounted () {
     this.localListData = this.listData.map(T => {
-      const item = cloneDeep(T)
+      const item = JSON.parse(JSON.stringify(T))
       item.show = false
       item.selected = false
       return item
